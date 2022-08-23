@@ -1,0 +1,26 @@
+<%- include("partials/header.ejs") %> 
+<body>
+<%- include("partials/navbar.ejs") %> 
+    <div class="news-container ">
+        <div class="news ">
+            <% articles.forEach(function(article,index){ %>
+                <% if ((typeof article.url=='object') || (typeof article.title=='object') || (typeof article.urlToImage=='object') || (typeof article.content=='object')){ %>
+                    <% } else{ %>
+                        <a href="<%- article.url %>" target="_blank" class="news-box Hover-effect">
+                            <img src="<%- article.urlToImage %>" alt="Image">
+                            <h3>
+                                <%- article.title %>
+                            </h3>
+                            <p>
+                                <%- article.content.replace(/<[^>]+>/g, '') %>
+                            </p>
+                            <br>
+                            <p><%- new Date(article.publishedAt.slice(0,10)).toDateString() %>    <%- moment.utc(article.publishedAt).local().format('hh : mm A') %> </span></p>
+                        </a>
+                        <% } %>
+                        <% }) %>
+        </div>
+    </div>
+</body>
+
+</html>
